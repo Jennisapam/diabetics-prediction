@@ -1,201 +1,146 @@
-# diabetics-prediction
-A Python and Streamlit undergraduate project that uses a Random Forest classifier to predict the diabetes outcome label from eight input measurements. The application combines model predictions, dataset summaries and visual comparisons in an interactive interface.
+# Diabetes Prediction System
 
-Educational prototype only. This project is not clinically validated and must not be used to diagnose, rule out or manage diabetes. The current interface uses diagnostic wording; treat its output only as a model classification.
+An interactive machine-learning application built with Python and Streamlit that predicts a diabetes outcome label from eight user inputs.
 
-Features
+I developed this undergraduate project to practise the complete machine-learning workflow: preparing data, training a classifier, evaluating predictions and building an interface.
 
-Eight sidebar sliders for entering example inputs.
+Educational project only: This application is not clinically validated and should not be used to diagnose or rule out diabetes.
 
-Random Forest training and test-set accuracy displayed in the app.
+# What the application does
 
-A table showing the entered values and descriptive statistics for the dataset.
+Users enter example health measurements through eight sidebar sliders. The application then:
+1.Displays a prediction from a Random Forest classifier.
+2.Shows the entered values and dataset summary statistics.
+3.Visualises how the example inputs compare with the dataset.
+4.Displays the model’s test accuracy.
 
-Seven scatterplots comparing the input values with the dataset, with the example highlighted in red.
+# Technologies used
+1.Python — application and model development
+2.Streamlit — interactive interface
+3.pandas — data loading and analysis
+4.scikit-learn — model training and evaluation
+5.Matplotlib and Seaborn — visualisations
 
-Binary predictions: 0 for the non-diabetes label and 1 for the diabetes label.
+# Dataset
 
-Dataset
+The project uses the Pima Indians Diabetes dataset, stored in diabetes.csv.
 
-The project uses the Pima Indians Diabetes dataset, supplied as diabetes.csv. The accompanying project report identifies Kaggle as its source.
+-Dataset detail	Value
+-Total records	768
+-Input features	8
 
-Item
+Target variable	Outcome:
+-Non-diabetes records	500
+-Diabetes records	268
+-Training records	614
+-Testing records	154
 
-Value
+# The eight inputs are:
+1.Number of pregnancies
+2.Glucose
+3.Blood pressure
+4.Skin thickness
+5.Insulin
+6.Body mass index (BMI)
+7.Diabetes pedigree function
+8.Age
 
-Records
+The target is encoded as 0 for non-diabetes and 1 for diabetes.
 
-768
+# Model and approach
 
-Input features
+The application uses a Random Forest classifier, which combines predictions from multiple decision trees.
 
-8
+The workflow is:
 
-Target column
+1.Load the dataset using pandas.
+2.Separate the eight input features from the target.
+3.Create an 80/20 train–test split, using random_state=0.
+4.Train the Random Forest model.
+5.Evaluate its accuracy on the test set.
+6.Generate a prediction for the values entered in the interface.
 
-Outcome
+Random Forest was the only classifier implemented in this version.
 
-Non-diabetes labels (0)
+# Results
 
-500
+The project report recorded approximately 79.22% test accuracy.
 
-Diabetes labels (1)
+The train–test split is fixed, but the Random Forest model does not have a fixed random seed. As a result, accuracy and predictions may vary when the application retrains.
 
-268
+This version evaluated accuracy only. Precision, recall, F1-score, specificity and ROC-AUC were not calculated, and cross-validation was not performed.
 
-Training records
+Project files
+File or folder	Description
+pr.py	Streamlit application and model code
+diabetes.csv	Dataset
+requirements.txt	Required Python packages
+prediction output/	Application screenshots
+README.md	Project overview and setup instructions
 
-614
+# How to run the application
+1. Download the project
 
-Test records
+Download or clone the repository. Open a terminal in the folder containing pr.py, diabetes.csv and requirements.txt.
 
-154
-
-Inputs
-
-CSV column
-
-Interface input
-
-Pregnancies
-
-Number of pregnancies
-
-Glucose
-
-Glucose
-
-BloodPressure
-
-Blood pressure
-
-SkinThickness
-
-Skin thickness
-
-Insulin
-
-Insulin
-
-BMI
-
-Body mass index
-
-DiabetesPedigreeFunction
-
-Diabetes pedigree function
-
-Age
-
-Age
-
-Method and results
-
-Load the CSV using pandas.
-
-Separate the eight predictors from Outcome.
-
-Split the data into 80% training and 20% testing using random_state=0.
-
-Fit scikit-learn's RandomForestClassifier() with default parameters.
-
-Predict the outcome for the entered example and calculate test accuracy.
-
-The project report records approximately 79.22% test accuracy. This is a previously reported result, not a newly reproduced benchmark. The Random Forest has no fixed random seed, so retraining can change both accuracy and individual predictions. The app retrains when the Streamlit script reruns, including after input changes.
-
-Only Random Forest was trained. The implementation does not include cross-validation, stratification, hyperparameter tuning or comparisons with other classifiers. Precision, recall, F1, specificity and ROC-AUC were not calculated in this version. Summary statistics and scatterplots describe the data; they are not additional performance metrics or explanations of individual predictions.
-
-Files
-
-Place this README alongside pr.py inside the supplied prediction folder.
-
-File or folder
-
-Purpose
-
-pr.py
-
-Streamlit application, model training and evaluation
-
-diabetes.csv
-
-Dataset used by the application
-
-requirements.txt
-
-Python dependencies
-
-prediction output/
-
-Screenshots of the application
-
-README.md
-
-Project documentation
-
-Run locally
-
-Install Python 3, extract the project ZIP, and open a terminal in the prediction folder containing pr.py and diabetes.csv.
-
-Create a virtual environment:
-
+2. Create a virtual environment
 python -m venv .venv
 
 Activate it on macOS or Linux:
 
 source .venv/bin/activate
 
-Or on Windows PowerShell:
+Activate it on Windows PowerShell:
 
 .venv\Scripts\Activate.ps1
 
-Install dependencies and start the app:
-
+3. Install the dependencies
 python -m pip install -r requirements.txt
+
+4. Start the application
 python -m streamlit run pr.py
 
-Open the local URL displayed in the terminal. Adjust the sidebar sliders to explore example predictions and plots. Use fictional example values.
+Open the local link displayed in the terminal. Use the sidebar sliders to enter fictional example values and explore the predictions.
 
-Dataset not found? Run the command from the folder containing diabetes.csv; the code loads it using a relative path.
+If the dataset cannot be found: Check that diabetes.csv is in the current working folder when you start the application.
 
-Dependencies include Streamlit, pandas, scikit-learn, matplotlib and seaborn. The requirements file also lists Plotly, although the current script does not use it. Package versions are not pinned, so an exact original software environment is not recorded.
+Screenshots and demo
 
-Screenshots and demo status
+Screenshots are available in the prediction output folder.
 
-The supplied prediction output folder contains nine application screenshots. These illustrate the interface and outputs. There is no public live demo currently. The application runs locally using the instructions above.
+The application currently runs locally. A public live demo has not been deployed.
 
-Healthcare considerations and limitations
+# Limitations and healthcare considerations
 
-Validation: The reported score comes from a single split of one dataset. There is no external, prospective or clinical validation, and no formal independent user study is documented.
+This project demonstrates a machine-learning application, but its results do not establish clinical reliability.
 
-Missed cases and false alarms: Accuracy alone does not quantify false negatives or false positives. A negative prediction cannot rule out diabetes, and a positive prediction does not establish a diagnosis.
+Limited validation: Evaluation used one train–test split. The model has not been tested in a clinical setting or validated on an independent dataset.
 
-Data quality: The supplied CSV has no blank values, but the code does not handle zero-valued clinical measurements as missing or perform imputation. Despite a preprocessing description in the project report, median replacement is not implemented in this script.
+False negatives and false positives: Accuracy alone does not show how many diabetes cases were missed or how many non-diabetes cases were incorrectly flagged.
 
-Bias and generalisability: The labels are imbalanced (500 versus 268), and the implementation uses no resampling or class weighting. Subgroup performance and fairness were not evaluated; results must not be assumed to generalise to other populations.
+Data quality: The current code does not replace potentially invalid zero-valued measurements or perform missing-value imputation.
 
-Explainability: Scatterplots provide descriptive comparisons. The app does not provide feature-attribution explanations such as SHAP values.
+Class imbalance and bias: The dataset contains more non-diabetes records than diabetes records. No balancing method or subgroup fairness evaluation was implemented.
 
-Privacy and governance: The script does not explicitly save entered values or send them to an external API. This is not a privacy audit or compliance guarantee. Use fictional inputs; any hosted version would need review of data permissions, hosting, access and logging.
+Explainability: The scatterplots describe the data but do not explain why the model made a particular prediction.
 
-Human oversight: The prototype is for demonstrating a machine-learning workflow. Clinical interpretation and decisions require qualified healthcare professionals.
+Reproducibility: The model retrains when the application reruns, and its random seed is not fixed.
 
-Potential improvements
+Privacy: Use fictional inputs when demonstrating the application. The current script does not explicitly save entered values, but no formal 
+privacy assessment has been completed.
 
-Handle implausible or missing measurements within a training pipeline.
+Human oversight: The interface currently uses wording such as “You are diabetic.” This should be understood only as a model output, not a diagnosis.
 
-Fix the model seed, pin dependency versions and avoid retraining on every interaction.
+# Future improvements
+Compare Random Forest with other classifiers.
+Add stratified cross-validation and more evaluation metrics.
+Improve handling of missing and implausible measurements.
+Fix the model seed and save the trained model.
+Add explanations for individual predictions.
+Evaluate performance across patient subgroups.
+Replace diagnostic wording with clear educational messaging.
+Prepare a public demonstration using fictional cases.
 
-Compare baseline classifiers and use stratified cross-validation.
+# Author
 
-Report a confusion matrix, precision, recall, specificity, F1 and ROC-AUC.
-
-Evaluate subgroup performance and validate on an independent dataset.
-
-Add appropriate explanations and replace diagnostic wording before a public educational demo.
-
-These are future improvements, not features already implemented.
-
-Author
-
-Jenifer Sapam — GitHub
+Jenifer Sapam
